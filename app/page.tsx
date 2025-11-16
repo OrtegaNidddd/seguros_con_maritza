@@ -1,103 +1,129 @@
-import Image from "next/image";
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
+import emailjs from "@emailjs/browser"
+import { Header } from "@/components/sections/Header"
+import { HeroSection } from "@/components/sections/HeroSection"
+import { AboutSection } from "@/components/sections/AboutSection"
+import { WhyServicesSection } from "@/components/sections/WhyServicesSection"
+import { EducationalSection } from "@/components/sections/EducationalSection"
+import { ServicesSection } from "@/components/sections/ServicesSection"
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection"
+import { CalculatorSection } from "@/components/sections/CalculatorSection"
+import { ContactSection, CONTACT_FORM_INITIAL_STATE, type ContactFormValues } from "@/components/sections/ContactSection"
+import { Footer } from "@/components/sections/Footer"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [email, setEmail] = useState("")
+  const [age, setAge] = useState(30)
+  const [dependents, setDependents] = useState(2)
+  const [monthlyIncome, setMonthlyIncome] = useState(5000)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  const [formData, setFormData] = useState<ContactFormValues>(CONTACT_FORM_INITIAL_STATE)
+  const [isNewsletterSending, setIsNewsletterSending] = useState(false)
+  const [newsletterMessage, setNewsletterMessage] = useState<string | null>(null)
+  const [isContactSending, setIsContactSending] = useState(false)
+  const [contactMessage, setContactMessage] = useState<string | null>(null)
+  const emailJsConfig = {
+    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "",
+    newsletterTemplateId: process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID ?? "",
+    contactTemplateId: process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID ?? "",
+    publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "",
+  }
+
+  const sendEmail = (templateId: string, payload: Record<string, string>) => {
+    if (!emailJsConfig.serviceId || !templateId || !emailJsConfig.publicKey) {
+      return Promise.reject(new Error("Falta configurar EmailJS en las variables de entorno."))
+    }
+
+    return emailjs.send(emailJsConfig.serviceId, templateId, payload, emailJsConfig.publicKey)
+  }
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setIsNewsletterSending(true)
+    setNewsletterMessage(null)
+
+    try {
+      await sendEmail(emailJsConfig.newsletterTemplateId, {
+        subscriber_email: email,
+      })
+      setNewsletterMessage("¡Gracias! Te escribiré pronto con novedades.")
+      setEmail("")
+    } catch (error) {
+      console.error("Error al enviar el correo de suscripción:", error)
+      setNewsletterMessage("No pude registrar tu correo. Intenta nuevamente en unos minutos.")
+    } finally {
+      setIsNewsletterSending(false)
+    }
+  }
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsContactSending(true)
+    setContactMessage(null)
+    const submissionTime = new Date().toLocaleString("es-CO", {
+      timeZone: "America/Bogota",
+      dateStyle: "medium",
+      timeStyle: "short",
+    })
+
+    try {
+      await sendEmail(emailJsConfig.contactTemplateId, {
+        ...formData,
+        full_name: formData.nombreCompleto.trim(),
+        time: submissionTime,
+      })
+      setContactMessage("¡Gracias! Me pondré en contacto contigo muy pronto.")
+      setFormData(CONTACT_FORM_INITIAL_STATE)
+    } catch (error) {
+      console.error("Error al enviar el formulario de contacto:", error)
+      setContactMessage("Hubo un problema al enviar tu información. Por favor, inténtalo nuevamente.")
+    } finally {
+      setIsContactSending(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted">
+      <Header />
+      <HeroSection
+        email={email}
+        onEmailChange={setEmail}
+        onSubmit={handleSubscribe}
+        isSending={isNewsletterSending}
+        message={newsletterMessage}
+      />
+      <AboutSection />
+      <WhyServicesSection />
+      <EducationalSection />
+      <ServicesSection />
+      <TestimonialsSection />
+      <CalculatorSection
+        age={age}
+        dependents={dependents}
+        monthlyIncome={monthlyIncome}
+        onAgeChange={setAge}
+        onDependentsChange={setDependents}
+        onMonthlyIncomeChange={setMonthlyIncome}
+      />
+      <ContactSection
+        formData={formData}
+        onChange={handleFormChange}
+        onSubmit={handleFormSubmit}
+        isSending={isContactSending}
+        message={contactMessage}
+      />
+      <Footer />
     </div>
-  );
+  )
 }
