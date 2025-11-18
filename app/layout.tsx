@@ -1,46 +1,58 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from 'next/font/google'
-import "./globals.css"
-
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+// app/layout.tsx
+import "./globals.css";
+import type { Metadata } from "next";
+import { Outfit, Lora } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Seguros con Maritza",
+  metadataBase: new URL("https://segurosconmaritza.com"),
+  title: {
+    default: "Seguros con Maritza | Asesoría en seguros en Colombia",
+    template: "%s | Seguros con Maritza",
+  },
   description:
-    "Maritza Cañas, asesora certificada de seguros con 30 años de experiencia. Pólizas educativas, vida, salud, autos, hogar y más. Tú brújula financiera.",
-  generator: "v0.app",
-  icons: {
-    icon: [
+    "Asesoría en seguros de vida, salud, autos, hogar y pólizas educativas. Más de 40 años de experiencia acompañando familias colombianas.",
+  openGraph: {
+    type: "website",
+    title: "Seguros con Maritza",
+    description:
+      "Protección y asesoría en seguros de vida, salud, hogar y más.",
+    url: "https://segurosconmaritza.com",
+    siteName: "Seguros con Maritza",
+    locale: "es_CO",
+    images: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        url: "/src/familia.webp", // ya existe en tu /public
+        width: 1200,
+        height: 630,
+        alt: "Familia protegida con Seguros con Maritza",
       },
     ],
-    apple: "/apple-icon.png",
   },
-}
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="es">
-      <body className={`font-sans antialiased`}>
-        {children}
-        
-      </body>
+    <html lang="es" className={`${outfit.variable} ${lora.variable}`}>
+      <body>{children}</body>
     </html>
-  )
+  );
 }

@@ -19,17 +19,11 @@ export const CONTACT_FORM_INITIAL_STATE: ContactFormValues = {
 
 type ContactSectionProps = {
   formData: ContactFormValues
-  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
+  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   isSending: boolean
   message: string | null
 }
-
-const highlights = [
-  { icon: Shield, title: "¿Por qué una Poliza Educativa?", desc: "Garantiza tu tranquilidad y la de tu familia sin preocuparte de lo que pueda pasar en el futuro." },
-  { icon: CheckCircle2, title: "Elige el que se adapte", desc: "Cada póliza está diseñada para diferentes posibilidades financieras y necesidades." },
-  { icon: Heart, title: "Regala oportunidades", desc: "Este año brinda a tus hijos la oportunidad de crecer, aprender y seguir soñando." },
-]
 
 const COLOMBIA_CITIES = [
   "Bogotá",
@@ -38,6 +32,7 @@ const COLOMBIA_CITIES = [
   "Barranquilla",
   "Cartagena",
   "Bucaramanga",
+  "Cúcuta",
   "Pereira",
   "Santa Marta",
   "Manizales",
@@ -45,36 +40,69 @@ const COLOMBIA_CITIES = [
   "Villavicencio",
   "Armenia",
   "Ibagué",
-  "Cúcuta",
   "Neiva",
 ]
 
 export function ContactSection({ formData, onChange, onSubmit, isSending, message }: ContactSectionProps) {
   return (
-    <section id="contacto" className="py-16 md:py-24 bg-gradient-to-r from-primary/5 to-accent/5">
+    <section id="contacto" className="py-12 bg-linear-to-r from-primary/5 to-accent/5">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">¡Garantiza la educación superior de tus hijos hoy!</h2>
-          <p className="text-lg text-muted-foreground mb-4">Respaldada por 30 años de experiencia, mi compromiso es acompañar el bienestar y potenciar el éxito académico de tus hijos.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
+            ¡Garantiza la educación superior de tus hijos hoy!
+          </h2>
+          <p className="text-lg text-muted-foreground mb-4">
+            Respaldada por 40 años de experiencia, mi compromiso es acompañar el bienestar y potenciar el
+            éxito académico de tus hijos.
+          </p>
         </div>
 
         <div className="bg-background rounded-2xl p-8 border border-border mb-8">
           <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {highlights.map((item) => (
-              <div key={item.title} className="text-center">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 mx-auto">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
+            <div className="flex gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Shield className="w-6 h-6 text-primary" />
               </div>
-            ))}
+              <div>
+                <p className="text-sm font-semibold text-foreground">Acompañamiento especializado</p>
+                <p className="text-xs text-muted-foreground">
+                  Te acompaño en cada etapa del proceso, desde la planeación hasta la proyección de metas futuras.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <CheckCircle2 className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Planes a la medida</p>
+                <p className="text-xs text-muted-foreground">
+                  Diseñamos un plan educativo personalizado según tu realidad financiera y tus objetivos.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Heart className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Compromiso real</p>
+                <p className="text-xs text-muted-foreground">
+                  Más que una póliza, construimos juntos un proyecto de vida para quienes amas.
+                </p>
+              </div>
+            </div>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-6" aria-live="polite">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Nombre completo</label>
+              <label htmlFor="nombreCompleto" className="block text-sm font-medium text-foreground mb-2">
+                Nombre completo
+              </label>
               <input
+                id="nombreCompleto"
                 type="text"
                 name="nombreCompleto"
                 value={formData.nombreCompleto}
@@ -87,8 +115,11 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Correo</label>
+                <label htmlFor="correo" className="block text-sm font-medium text-foreground mb-2">
+                  Correo
+                </label>
                 <input
+                  id="correo"
                   type="email"
                   name="correo"
                   value={formData.correo}
@@ -98,9 +129,13 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   required
                 />
               </div>
+
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Celular</label>
+                <label htmlFor="celular" className="block text-sm font-medium text-foreground mb-2">
+                  Celular
+                </label>
                 <input
+                  id="celular"
                   type="tel"
                   name="celular"
                   value={formData.celular}
@@ -114,8 +149,11 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Ciudad</label>
+                <label htmlFor="ciudad" className="block text-sm font-medium text-foreground mb-2">
+                  Ciudad
+                </label>
                 <select
+                  id="ciudad"
                   name="ciudad"
                   value={formData.ciudad}
                   onChange={onChange}
@@ -130,9 +168,13 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   ))}
                 </select>
               </div>
+
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">¿Qué edad tienen tus hijos?</label>
+                <label htmlFor="edadHijo" className="block text-sm font-medium text-foreground mb-2">
+                  ¿Qué edad tienen tus hijos?
+                </label>
                 <input
+                  id="edadHijo"
                   type="text"
                   name="edadHijo"
                   value={formData.edadHijo}
@@ -144,21 +186,15 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
               </div>
             </div>
 
-            <div className="bg-muted/50 p-4 rounded-lg text-xs text-muted-foreground">
-              <p>
-                Al enviar este formulario, aceptas que me ponga en contacto contigo para brindarte una asesoría personalizada. Tus datos serán tratados con confidencialidad según nuestras políticas de privacidad.
-              </p>
-            </div>
-
-            <div className="space-y-3">
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={isSending}
-                className="w-full py-4 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/25 transition transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-linear-to-r from-primary to-accent rounded-xl text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/25 transition transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSending ? "Enviando tu solicitud..." : "Ponte en contacto conmigo"}
               </button>
-              {message && <p className="text-sm text-muted-foreground">{message}</p>}
+              {message && <p className="text-sm text-muted-foreground mt-2">{message}</p>}
             </div>
           </form>
         </div>
@@ -167,17 +203,25 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
           <div className="space-y-2">
             <Mail className="w-8 h-8 text-primary mx-auto" />
             <p className="text-sm text-muted-foreground">Correo</p>
-            <a href="mailto:maritza@email.com" className="font-semibold text-foreground hover:text-primary transition">
-              ejemplo@gmail.com
+            <a
+              href="mailto:maritzcanas@gmail.com"
+              className="font-semibold text-foreground hover:text-primary transition"
+            >
+              maritzcanas@gmail.com
             </a>
           </div>
+
           <div className="space-y-2">
             <Phone className="w-8 h-8 text-primary mx-auto" />
-            <p className="text-sm text-muted-foreground">Celular</p>
-            <a href="tel:+573001234567" className="font-semibold text-foreground hover:text-primary transition">
-              +57 300 123 4567
+            <p className="text-sm text-muted-foreground">WhatsApp</p>
+            <a
+              href="https://wa.me/573153183896?text=Hola%20Maritza%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Quisiera%20saber%20m%C3%A1s%20sobre%20tus%20servicios."
+              className="font-semibold text-foreground hover:text-primary transition"
+            >
+              315 318 3896
             </a>
           </div>
+
           <div className="space-y-2">
             <MapPin className="w-8 h-8 text-primary mx-auto" />
             <p className="text-sm text-muted-foreground">Ubicación</p>

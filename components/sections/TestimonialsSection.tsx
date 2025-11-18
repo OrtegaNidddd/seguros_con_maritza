@@ -16,14 +16,14 @@ const testimonials = [
   {
     name: "Juan Pérez",
     role: "Ejecutivo",
-    message: "30 años de experiencia se notan. Recomiendo a Maritza sin dudarlo.",
+    message: "40 años de experiencia se notan. Recomiendo a Maritza sin dudarlo.",
     rating: 5,
   },
 ]
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonios" className="py-16 md:py-24 bg-card/50">
+    <section id="testimonios" className="py-12 bg-card/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">Lo que mis clientes dicen</h2>
@@ -49,4 +49,3 @@ export function TestimonialsSection() {
     </section>
   )
 }
-

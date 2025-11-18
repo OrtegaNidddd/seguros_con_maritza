@@ -17,9 +17,9 @@ import { Footer } from "@/components/sections/Footer"
 
 export default function Home() {
   const [email, setEmail] = useState("")
-  const [age, setAge] = useState(30)
-  const [dependents, setDependents] = useState(2)
-  const [monthlyIncome, setMonthlyIncome] = useState(5000)
+  const [age, setAge] = useState(8) 
+  const [dependents, setDependents] = useState(5) 
+  const [monthlyIncome, setMonthlyIncome] = useState(8000000) 
 
   const [formData, setFormData] = useState<ContactFormValues>(CONTACT_FORM_INITIAL_STATE)
   const [isNewsletterSending, setIsNewsletterSending] = useState(false)
@@ -56,7 +56,7 @@ export default function Home() {
       setEmail("")
     } catch (error) {
       console.error("Error al enviar el correo de suscripción:", error)
-      setNewsletterMessage("No pude registrar tu correo. Intenta nuevamente en unos minutos.")
+      setNewsletterMessage("Hubo un problema al enviar tu información. Por favor, intenta nuevamente en unos minutos.")
     } finally {
       setIsNewsletterSending(false)
     }
@@ -94,7 +94,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted">
+    <div className="min-h-screen bg-linear-to-b from-background via-background to-muted">
       <Header />
       <HeroSection
         email={email}

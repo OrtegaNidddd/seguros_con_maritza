@@ -31,13 +31,13 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Contacto</h4>
             <ul className="space-y-2 text-background/70">
               <li>
-                <a href="mailto:maritza@email.com" className="hover:text-background transition">
-                  ejemplo@gmail.com
+                <a href="mailto:maritzcanas@gmail.com" className="hover:text-background transition">
+                  maritzacanas@gmail.com
                 </a>
               </li>
               <li>
-                <a href="tel:+573001234567" className="hover:text-background transition">
-                  +57 300 123 4567
+                <a href="https://wa.me/573153183896?text=Hola%20Maritza%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Quisiera%20saber%20m%C3%A1s%20sobre%20tus%20servicios." className="hover:text-background transition">
+                  315 318 3896
                 </a>
               </li>
             </ul>
