@@ -23,12 +23,12 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isEducationOpen, setIsEducationOpen] = useState(false)
 
-  const toggleMenu = () => setIsMenuOpen(prev => !prev)
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev)
   const closeMenu = () => {
     setIsMenuOpen(false)
     setIsEducationOpen(false)
   }
-  const toggleEducation = () => setIsEducationOpen(prev => !prev)
+  const toggleEducation = () => setIsEducationOpen((prev) => !prev)
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
@@ -37,14 +37,12 @@ export function Header() {
           <div className="w-32 h-auto rounded-lg flex items-center justify-center">
             <img
               src="/src/logo.webp"
-              alt="Logo de Seguros con Maritza"
+              alt="Logo de Seguros con Maritza, asesora de seguros en Cúcuta"
               className="w-full h-full transition-transform duration-200 group-hover:scale-105"
             />
           </div>
           <div>
-            <h1 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">
-              Maritza Cañas
-            </h1>
+            <p className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">Maritza Cañas</p>
             <p className="text-xs text-muted-foreground">Tu Brujula Financiera</p>
           </div>
         </Link>
@@ -58,15 +56,11 @@ export function Header() {
               aria-expanded={isEducationOpen}
             >
               Educación
-              <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  isEducationOpen ? "rotate-180" : ""
-                }`}
-              />
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isEducationOpen ? "rotate-180" : ""}`} />
             </button>
             {isEducationOpen && (
               <div className="absolute right-0 mt-3 w-48 rounded-xl border border-border bg-background p-3 shadow-lg animate-in fade-in slide-in-from-top-2">
-                {educationItems.map(item => (
+                {educationItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
@@ -79,12 +73,8 @@ export function Header() {
               </div>
             )}
           </div>
-          {navItems.map(item => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm text-foreground hover:text-primary transition"
-            >
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href} className="text-sm text-foreground hover:text-primary transition">
               {item.label}
             </a>
           ))}
@@ -93,27 +83,15 @@ export function Header() {
         <button
           type="button"
           className="md:hidden p-2 rounded-md border border-border text-foreground hover:text-primary hover:border-primary transition relative overflow-hidden"
-          aria-label={isMenuOpen ? "Cerrar menu" : "Abrir menu"}
+          aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
         >
-          <span className="sr-only">{isMenuOpen ? "Cerrar menu" : "Abrir menu"}</span>
+          <span className="sr-only">{isMenuOpen ? "Cerrar menú" : "Abrir menú"}</span>
           <div className="flex flex-col justify-center items-center gap-1.5">
-            <span
-              className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
-                isMenuOpen ? "translate-y-2 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-200 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
-                isMenuOpen ? "-translate-y-2 -rotate-45" : ""
-              }`}
-            />
+            <span className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${isMenuOpen ? "translate-y-2 rotate-45" : ""}`} />
+            <span className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-200 ${isMenuOpen ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
           </div>
         </button>
       </div>
@@ -129,15 +107,11 @@ export function Header() {
                 aria-expanded={isEducationOpen}
               >
                 Educación
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform ${
-                    isEducationOpen ? "rotate-180" : ""
-                  }`}
-                />
+                <ChevronDown className={`w-4 h-4 transition-transform ${isEducationOpen ? "rotate-180" : ""}`} />
               </button>
               {isEducationOpen && (
                 <div className="pl-4 flex flex-col gap-2 border-l border-border/80">
-                  {educationItems.map(item => (
+                  {educationItems.map((item) => (
                     <a
                       key={item.href}
                       href={item.href}
@@ -150,7 +124,7 @@ export function Header() {
                 </div>
               )}
             </div>
-            {navItems.map(item => (
+            {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}

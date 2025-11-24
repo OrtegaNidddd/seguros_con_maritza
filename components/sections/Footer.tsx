@@ -5,7 +5,10 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="font-bold text-lg mb-4">Maritza Cañas</h3>
-            <p className="text-background/70">Asesora Certificada en Pólizas de Vida y Recursos Educativos</p>
+            <p className="text-background/70">Asesora certificada en pólizas de vida, salud y recursos educativos</p>
+            <p className="mt-3 text-background/80">
+              Asesoría personalizada en seguros para familias y empresas en Cúcuta, Norte de Santander.
+            </p>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Información</h4>
@@ -36,7 +39,10 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/573153183896?text=Hola%20Maritza%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Quisiera%20saber%20m%C3%A1s%20sobre%20tus%20servicios." className="hover:text-background transition">
+                <a
+                  href="https://wa.me/573153183896?text=Hola%20Maritza%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Quisiera%20saber%20m%C3%A1s%20sobre%20tus%20servicios."
+                  className="hover:text-background transition"
+                >
                   315 318 3896
                 </a>
               </li>
@@ -50,4 +56,3 @@ export function Footer() {
     </footer>
   )
 }
-
