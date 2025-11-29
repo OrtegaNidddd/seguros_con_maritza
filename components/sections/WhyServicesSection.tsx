@@ -6,7 +6,7 @@ const reasons = [
   { icon: Zap, title: "Asesoría Integral", desc: "Ofrezco soluciones completas adaptadas a tu situación financiera" },
   { icon: CheckCircle2, title: "Transparencia Total", desc: "Sin sorpresas, todo claro desde el inicio del proceso" },
   { icon: BookOpen, title: "Educación Financiera", desc: "Te enseño a entender tus pólizas y tomar decisiones informadas" },
-  { icon: Star, title: "Seguimiento Continuo", desc: "Estoy aquí para ti, no solo para vender, sino para acompañarte" },
+  { icon: Star, title: "Seguimiento Continuo", desc: "Estoy aquí para tí, no solo para vender, sino para acompañarte" },
 ]
 
 export function WhyServicesSection() {

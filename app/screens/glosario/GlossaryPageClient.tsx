@@ -37,41 +37,24 @@ type GlossaryCategory = {
 
 const glossaryCategories: GlossaryCategory[] = [
   {
-    id: "pension",
-    title: "Pensión Voluntaria",
-    description: "Términos esenciales para entender el ahorro voluntario para tu retiro.",
-    icon: PiggyBank,
-    gradient: "from-amber-300 via-yellow-400 to-amber-600",
-    accent: "text-amber-900 dark:text-amber-100",
-    border: "border-amber-400/70 dark:border-amber-500",
-    badge: "bg-amber-100 text-amber-900 dark:bg-amber-900/50 dark:text-amber-100",
-    card: "bg-amber-50/80 dark:bg-amber-950/40",
-    featured: true,
+    id: "educativas",
+    title: "Pólizas Educativas",
+    description: "Herramientas financieras para asegurar el pago de estudios futuros.",
+    icon: GraduationCap,
+    gradient: "from-cyan-100 to-cyan-200",
+    accent: "text-cyan-600 dark:text-cyan-200",
+    border: "border-cyan-600/50 dark:border-cyan-700",
+    badge: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-100",
+    card: "bg-cyan-50/80 dark:bg-cyan-950/30",
     terms: [
-      {
-        term: "Aporte voluntario",
-        definition:
-          "Aporte que puedes realizar de manera libre, ya sea mensual u ocasional, para incrementar el valor de tu ahorro en la pensión voluntaria.",
-      },
-      {
-        term: "Horizonte de inversión",
-        definition: "Tiempo estimado en el que mantendrás tus aportes invertidos antes de iniciar los retiros.",
-      },
-      {
-        term: "Beneficio tributario",
-        definition:
-          "Porción de tus aportes que puedes deducir de la base gravable del impuesto sobre la renta.",
-      },
-      {
-        term: "Renta programada",
-        definition:
-          "Modalidad de retiro que recibiras de acuerdo a tu proyección en tiempo y valor.",
-      },
-      {
-        term: "Designación de beneficiarios",
-        definition:
-          "Registro de las personas que heredarán el saldo si falleces durante el periodo de ahorro.",
-      },
+      { term: "Plan garantizado", definition: "Compromiso de cubrir la matrícula sin importar aumentos futuros." },
+      { term: "Flexibilidad de pago", definition: "Planes de financiación, de acuerdo al plan." },
+      { term: "Periodo de aportes", definition: "Tiempo durante el cual realizas los pagos acordados de acuerdo al plan." },
+      { term: "Cobertura por fallecimiento del tomador", definition: "Garantiza que el estudiante reciba los fondos pactados." },
+      { term: "Cobertura por invalidez del tomador", definition: "Garantiza el pago total de la póliza y de la universidad de acuerdo al plan contratado." },
+      { term: "Cláusula de continuidad académica", definition: "Garantiza la finalización de los estudios aunque falte el tomador." },
+      { term: "Calendario escolar", definition: "Cronograma que alinea los pagos con los periodos académicos." },
+      { term: "Póliza complementaria", definition: "Plan adicional para cubrir posgrados o intercambios." },
     ],
   },
   {
@@ -95,6 +78,25 @@ const glossaryCategories: GlossaryCategory[] = [
     ],
   },
   {
+    id: "pension",
+    title: "Pensión Voluntaria",
+    description: "Términos esenciales para entender el ahorro voluntario para tu retiro.",
+    icon: PiggyBank,
+    gradient: "from-amber-300 via-yellow-400 to-amber-600",
+    accent: "text-amber-900 dark:text-amber-100",
+    border: "border-amber-400/70 dark:border-amber-500",
+    badge: "bg-amber-100 text-amber-900 dark:bg-amber-900/50 dark:text-amber-100",
+    card: "bg-amber-50/80 dark:bg-amber-950/40",
+    featured: true,
+    terms: [
+      { term: "Aporte voluntario", definition: "Aporte que puedes realizar de manera libre, ya sea mensual u ocasional, para incrementar el valor de tu ahorro en la pensión voluntaria." },
+      { term: "Horizonte de inversión", definition: "Tiempo estimado en el que mantendrás tus aportes invertidos antes de iniciar los retiros." },
+      { term: "Beneficio tributario", definition: "Porción de tus aportes que puedes deducir de la base gravable del impuesto sobre la renta." },
+      { term: "Renta programada", definition: "Modalidad de retiro que recibirás de acuerdo a tu proyección en tiempo y valor." },
+      { term: "Designación de beneficiarios", definition: "Registro de las personas que heredarán el saldo si falleces durante el periodo de ahorro." },
+    ],
+  },
+  {
     id: "vida",
     title: "Seguros de Vida",
     description: "Términos básicos para entender cómo proteges el bienestar económico de tu familia.",
@@ -114,12 +116,12 @@ const glossaryCategories: GlossaryCategory[] = [
       { term: "Seguro universal", definition: "Póliza flexible que permite ajustar aportes y coberturas con el tiempo." },
       { term: "Prima nivelada", definition: "Pago constante que no aumenta con el paso de los años." },
       { term: "Valor en efectivo", definition: "Ahorro acumulado dentro de la póliza que puedes retirar o usar como garantía." },
-      { term: "Participación de utilidades", definition: "Ganancias adicionales que algunas aseguradoras reparten entre los asegurados."},
-      { term: "Periodo de contestabilidad", definition: "Tiempo en el que la aseguradora puede revisar la póliza si ocurre un siniestro."},
+      { term: "Participación de utilidades", definition: "Ganancias adicionales que algunas aseguradoras reparten entre los asegurados." },
+      { term: "Periodo de contestabilidad", definition: "Tiempo en el que la aseguradora puede revisar la póliza si ocurre un siniestro." },
       { term: "Exclusiones", definition: "Situaciones específicas que el seguro no cubre." },
-      { term: "Rider de enfermedades graves", definition: "Beneficio extra que entrega dinero si el asegurado padece una enfermedad seria."},
-      { term: "Invalidez total y permanente", definition: "Cobertura que paga si el asegurado pierde su capacidad laboral de forma definitiva."},
-      { term: "Ajuste por inflación", definition: "Cláusula que incrementa la suma asegurada para mantener su poder adquisitivo."},
+      { term: "Rider de enfermedades graves", definition: "Beneficio extra que entrega dinero si el asegurado padece una enfermedad seria." },
+      { term: "Invalidez total y permanente", definition: "Cobertura que paga si el asegurado pierde su capacidad laboral de forma definitiva." },
+      { term: "Ajuste por inflación", definition: "Cláusula que incrementa la suma asegurada para mantener su poder adquisitivo." },
       { term: "Periodo de carencia", definition: "Tiempo mínimo antes de poder reclamar ciertos beneficios." },
       { term: "Conversión de póliza", definition: "Posibilidad de transformar un seguro temporal en uno vitalicio sin nuevos exámenes." },
       { term: "Designación revocable", definition: "Forma de nombrar beneficiarios que puedes cambiar en cualquier momento." },
@@ -140,76 +142,16 @@ const glossaryCategories: GlossaryCategory[] = [
     badge: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-100",
     card: "bg-blue-50/80 dark:bg-blue-950/30",
     terms: [
-      { term: "Responsabilidad civil", definition: "Cobertura que paga los daños que causes a otras personas o bienes." },
-      { term: "Todo riesgo", definition: "Plan que cubre daños propios, a terceros, robo y desastres naturales." },
+      { term: "Todo riesgo", definition: "Cobertura a daños propios del vehiculo, robo y desastres naturales." },
+      { term: "Responsabilidad civil", definition: "Cobertura frente a lesiones a terceros: Personas o bienes" },
       { term: "Pérdida total", definition: "Situación en la que el vehículo no se puede reparar o el arreglo supera su valor." },
       { term: "Pérdida parcial", definition: "Daños que pueden repararse sin superar el porcentaje definido en la póliza." },
-      { term: "Franquicia", definition: "Porción del siniestro que asumes antes de que el seguro pague." },
-      {
-        term: "Asistencia en carretera",
-        definition: "Servicios de grúa, batería, combustible o cerrajería incluidos.",
-      },
-      {
-        term: "Vehículo de reemplazo",
-        definition: "Auto temporal que te entregan mientras reparan el tuyo.",
-      },
-      {
-        term: "Daños a terceros",
-        definition: "Indemnización a otras personas por lesiones o daños materiales causados por ti.",
-      },
-      {
-        term: "Daños propios",
-        definition: "Arreglos del vehículo asegurado cuando tú eres el afectado.",
-      },
-      {
-        term: "Accesorios asegurados",
-        definition: "Elementos adicionales como rines o pantallas cubiertos por la póliza.",
-      },
-      {
-        term: "Gastos de remolque",
-        definition: "Transporte del vehículo a un taller tras un accidente.",
-      },
-      {
-        term: "Cobertura contra robo",
-        definition: "Indemnización si el automóvil es hurtado total o parcialmente.",
-      },
-      {
-        term: "Cobertura de vidrios",
-        definition: "Reposición de panorámicos, laterales y espejos rotos.",
-      },
-      {
-        term: "Daños por eventos naturales",
-        definition: "Protección frente a granizo, inundaciones o caída de árboles.",
-      },
-      {
-        term: "Valor comercial",
-        definition: "Precio promedio del vehículo en el mercado al momento del siniestro.",
-      },
-      {
-        term: "Valor convenido",
-        definition: "Monto fijo pactado con la aseguradora para indemnizarte.",
-      },
-      { term: "Ajustador", definition: "Experto que inspecciona los daños y determina la indemnización." },
-      {
-        term: "Taller aliado",
-        definition: "Centro de servicio autorizado con garantía en las reparaciones.",
-      },
-      {
-        term: "Informe de siniestro",
-        definition: "Relato oficial de lo ocurrido que respalda tu reclamación.",
-      },
-      {
-        term: "Amparo patrimonial",
-        definition: "Protección extra cuando los daños a terceros superan el límite básico.",
-      },
-      {
-        term: "Responsabilidad extracontractual",
-        definition: "Protección frente a demandas por daños ocasionados sin un contrato.",
-      },
-      {
-        term: "Cobertura de llantas",
-        definition: "Reposición de neumáticos y rines por pinchazos, golpes o robo.",
-      },
+      { term: "Deducible", definition: "Porción del siniestro que asumes antes de que el seguro pague." },
+      { term: "Vehículo de reemplazo", definition: "Auto temporal que te entregan mientras reparan el tuyo." },
+      { term: "Daños a terceros", definition: "Indemnización a otras personas por lesiones o daños materiales causados por ti." },
+      { term: "Asistencia", definition: "Servicio de grúa, batería, combustible, cerrajeria, cambio de llantas, etc. En la ciudad y en carretera.." },
+      { term: "Cobertura de vidrios", definition: "Reposición de panorámicos y laterales" },
+      { term: "Valor convenido", definition: "Monto fijo pactado con la aseguradora para indemnizarte." },
     ],
   },
   {
@@ -223,177 +165,17 @@ const glossaryCategories: GlossaryCategory[] = [
     badge: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-100",
     card: "bg-emerald-50/80 dark:bg-emerald-950/30",
     terms: [
-      { term: "Seguro contra incendio", definition: "Indemniza los daños que cause el fuego en tu vivienda." },
-      {
-        term: "Seguro de contenido",
-        definition: "Protege muebles, electrodomésticos y objetos personales.",
-      },
-      {
-        term: "Responsabilidad civil familiar",
-        definition: "Cubre daños o lesiones que tú o tu familia causen a terceros.",
-      },
-      {
-        term: "Asistencia domiciliaria",
-        definition: "Servicios de plomería, electricidad o cerrajería cuando los necesitas.",
-      },
-      {
-        term: "Cobertura de electrodomésticos",
-        definition: "Repara o reemplaza equipos dañados por eventos súbitos.",
-      },
+      { term: "Edificación", definition: "Indemniza los daños que cause el fuego en tu vivienda." },
+      { term: "Contenido", definition: "Protege muebles, electrodomésticos y objetos personales." },
+      { term: "Responsabilidad civil familiar", definition: "Cubre daños o lesiones que tú o tu familia causen a terceros." },
+      { term: "Asistencia domiciliaria", definition: "Servicios de plomería, electricidad o cerrajería." },
+      { term: "Cobertura de electrodomésticos", definition: "Repara o reemplaza equipos dañados por arcos de electricidad." },
       { term: "Daños por agua", definition: "Protección frente a roturas de tuberías e inundaciones internas." },
       { term: "Daños por viento", definition: "Cubre afectaciones causadas por vendavales o tormentas." },
-      {
-        term: "Robo con violencia",
-        definition: "Indemniza cuando ladrones ingresan forzando cerraduras o ventanas.",
-      },
-      {
-        term: "Robo sin violencia",
-        definition: "Ampara hurtos sin evidencia de fuerza, como descuidos.",
-      },
-      {
-        term: "Valor de reposición",
-        definition: "Pago equivalente a comprar un artículo nuevo similar.",
-      },
-      {
-        term: "Mejoras locativas",
-        definition: "Protege remodelaciones que hiciste en una vivienda arrendada.",
-      },
-      {
-        term: "Pérdida de alquileres",
-        definition: "Compensa ingresos si tu propiedad arrendada queda inhabitable.",
-      },
-      {
-        term: "Vivienda desocupada",
-        definition: "Cláusula que mantiene la cobertura aunque no vivas allí temporalmente.",
-      },
-      {
-        term: "Casa de vacaciones",
-        definition: "Extiende el seguro a una segunda propiedad recreativa.",
-      },
-      { term: "Cobertura de joyas", definition: "Protege piezas de alto valor dentro del hogar." },
-      {
-        term: "Cobertura de obras de arte",
-        definition: "Ampara cuadros, esculturas y colecciones especiales.",
-      },
-      {
-        term: "Rotura de vidrios",
-        definition: "Reemplaza ventanales y espejos dañados accidentalmente.",
-      },
-      {
-        term: "Mascotas aseguradas",
-        definition: "Incluye responsabilidad por daños causados por tus animales.",
-      },
-      {
-        term: "Jardines y exteriores",
-        definition: "Cubre pérgolas, cercas y elementos decorativos al aire libre.",
-      },
-      {
-        term: "Daños a terceros",
-        definition: "Indemniza a vecinos afectados por incidentes originados en tu casa.",
-      },
-      {
-        term: "Cláusula de subrogación",
-        definition: "Permite a la aseguradora reclamar a quien ocasionó el daño.",
-      },
-      {
-        term: "Amparo de expensas",
-        definition: "Cubre gastos de administración mientras la vivienda está dañada.",
-      },
-    ],
-  },
-  {
-    id: "educativas",
-    title: "Pólizas Educativas",
-    description: "Herramientas financieras para asegurar el pago de estudios futuros.",
-    icon: GraduationCap,
-    gradient: "from-cyan-100 to-cyan-200",
-    accent: "text-cyan-600 dark:text-cyan-200",
-    border: "border-cyan-600/50 dark:border-cyan-700",
-    badge: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-100",
-    card: "bg-cyan-50/80 dark:bg-cyan-950/30",
-    terms: [
-      { term: "Fondo educativo", definition: "Cuenta de ahorro destinada exclusivamente a gastos de estudio." },
-      {
-        term: "Plan garantizado",
-        definition: "Compromiso de cubrir la matrícula sin importar aumentos futuros.",
-      },
-      {
-        term: "Ahorro programado",
-        definition: "Aportes periódicos automáticos para construir el capital educativo.",
-      },
-      {
-        term: "Bono escolar",
-        definition: "Pago anual destinado a útiles, uniformes o actividades académicas.",
-      },
-      {
-        term: "Cobertura de matrícula",
-        definition: "Garantía de pago de colegiatura o semestre universitario.",
-      },
-      {
-        term: "Cobertura de manutención",
-        definition: "Recursos para alojamiento, transporte y alimentación del estudiante.",
-      },
-      {
-        term: "Índice educativo",
-        definition: "Medida que ajusta el plan según el aumento de costos escolares.",
-      },
-      {
-        term: "Beneficiario estudiantil",
-        definition: "Niño o joven que recibirá los fondos cuando los necesite.",
-      },
-      {
-        term: "Periodo de aportes",
-        definition: "Tiempo durante el cual realizas contribuciones al plan.",
-      },
-      {
-        term: "Flexibilidad de pago",
-        definition: "Posibilidad de cambiar montos o fechas de tus aportes.",
-      },
-      {
-        term: "Rescate anticipado",
-        definition: "Retiro parcial de fondos antes del objetivo si surge una emergencia.",
-      },
-      {
-        term: "Exención de prima",
-        definition: "La aseguradora sigue aportando si el tutor fallece o queda inválido.",
-      },
-      {
-        term: "Cobertura por fallecimiento del tutor",
-        definition: "Garantiza que el estudiante reciba los fondos pactados.",
-      },
-      {
-        term: "Cobertura por invalidez del tutor",
-        definition: "Mantiene el plan activo si el tutor no puede seguir aportando.",
-      },
-      {
-        term: "Cobertura por desempleo",
-        definition: "Pausa temporal de pagos cuando pierdes tu trabajo.",
-      },
-      {
-        term: "Universidad global",
-        definition: "Opción para usar el capital en instituciones fuera del país.",
-      },
-      {
-        term: "Carta de compromiso",
-        definition: "Documento que certifica la disponibilidad de fondos ante la institución educativa.",
-      },
-      {
-        term: "Cláusula de continuidad académica",
-        definition: "Garantiza la finalización de los estudios aunque falte el tutor.",
-      },
-      {
-        term: "Rendimiento garantizado",
-        definition: "Tasa mínima de interés que crecerá tu ahorro.",
-      },
-      {
-        term: "Póliza complementaria",
-        definition: "Plan adicional para cubrir posgrados o intercambios.",
-      },
-      {
-        term: "Calendario escolar",
-        definition: "Cronograma que alinea los pagos con los periodos académicos.",
-      },
-      { term: "Asesor educativo", definition: "Experto que te guía para escoger universidad y uso del capital." },
+      { term: "Robo con violencia", definition: "Indemniza las pérdidas materiales de bienes a causa de robo donde se utiliza la violencia o intimidación." },
+      { term: "Robo sin violencia", definition: "Ampara hurtos sin evidencia de fuerza, como descuidos." },
+      { term: "Mejoras locativas", definition: "Protege remodelaciones que realizaste en una vivienda arrendada." },
+      { term: "Daños a terceros", definition: "Indemniza a vecinos afectados por incidentes originados en tu casa." },
     ],
   },
   {
@@ -408,87 +190,20 @@ const glossaryCategories: GlossaryCategory[] = [
     card: "bg-fuchsia-50/80 dark:bg-fuchsia-950/30",
     terms: [
       { term: "Indemnización", definition: "Dinero que recibes después de un accidente cubierto." },
-      {
-        term: "Capital asegurado",
-        definition: "Monto máximo que pagará la póliza por un siniestro.",
-      },
-      {
-        term: "Muerte accidental",
-        definition: "Pago a los beneficiarios si el asegurado fallece por un accidente.",
-      },
-      {
-        term: "Invalidez parcial",
-        definition: "Compensación cuando pierde funcionalidad solo una parte del cuerpo.",
-      },
-      {
-        term: "Invalidez total",
-        definition: "Pago completo si quedas imposibilitado para trabajar.",
-      },
-      {
-        term: "Gastos médicos por accidente",
-        definition: "Reembolso de tratamientos necesarios tras el evento.",
-      },
-      {
-        term: "Hospitalización diaria",
-        definition: "Renta por cada día internado debido a un accidente.",
-      },
-      {
-        term: "Cirugía reconstructiva",
-        definition: "Cobertura para procedimientos estéticos o funcionales tras lesiones.",
-      },
-      {
-        term: "Rehabilitación",
-        definition: "Terapias que te ayudan a recuperar movilidad o fuerza.",
-      },
-      {
-        term: "Prótesis",
-        definition: "Dispositivos artificiales cubiertos cuando necesitas reemplazar una parte del cuerpo.",
-      },
-      { term: "Ambulancia", definition: "Transporte médico de emergencia incluido en la póliza." },
-      {
-        term: "Cobertura 24/7",
-        definition: "Protección constante sin importar la hora o el lugar.",
-      },
-      {
-        term: "Deportes de riesgo",
-        definition: "Actividades que requieren declarar cobertura adicional.",
-      },
-      {
-        term: "Accidentes laborales",
-        definition: "Hechos imprevistos ocurridos mientras trabajas.",
-      },
-      {
-        term: "Accidentes domésticos",
-        definition: "Lesiones dentro del hogar cubiertas por la póliza.",
-      },
-      {
-        term: "Periodo de notificación",
-        definition: "Tiempo máximo para reportar un accidente a la aseguradora.",
-      },
-      {
-        term: "Beneficiario contingente",
-        definition: "Persona que recibe el beneficio si el titular original no puede hacerlo.",
-      },
-      {
-        term: "Reembolso",
-        definition: "Pago posterior que se hace tras presentar facturas médicas.",
-      },
-      {
-        term: "Convalecencia",
-        definition: "Apoyo económico durante el tiempo de recuperación.",
-      },
-      {
-        term: "Doble indemnización",
-        definition: "Cláusula que duplica el pago bajo condiciones especiales.",
-      },
-      {
-        term: "Cobertura internacional",
-        definition: "Protección válida si el accidente ocurre fuera del país.",
-      },
-      {
-        term: "Exclusiones por enfermedades",
-        definition: "Aclara que solo se cubren lesiones causadas por accidentes.",
-      },
+      { term: "Capital asegurado", definition: "Monto máximo que pagará la póliza por un siniestro." },
+      { term: "Muerte accidental", definition: "Pago a los beneficiarios si el asegurado fallece por un accidente." },
+      { term: "Invalidez parcial", definition: "Compensación cuando pierde funcionalidad solo una parte del cuerpo." },
+      { term: "Invalidez total", definition: "Pago completo si quedas imposibilitado para trabajar." },
+      { term: "Gastos médicos por accidente", definition: "Reembolso de tratamientos necesarios tras el evento." },
+      { term: "Hospitalización diaria", definition: "Renta por cada día internado debido a un accidente." },
+      { term: "Cirugía reconstructiva", definition: "Cobertura para procedimientos estéticos o funcionales tras lesiones." },
+      { term: "Cobertura 24/7", definition: "Protección constante sin importar la hora o el lugar." },
+      { term: "Accidentes laborales", definition: "Hechos imprevistos ocurridos mientras trabajas." },
+      { term: "Accidentes domésticos", definition: "Lesiones dentro del hogar cubiertas por la póliza." },
+      { term: "Periodo de notificación", definition: "Tiempo máximo para reportar un accidente a la aseguradora." },
+      { term: "Reembolso", definition: "Pago posterior que se hace tras presentar facturas médicas." },
+      { term: "Cobertura internacional", definition: "Protección válida si el accidente ocurre fuera del país." },
+      { term: "Exclusiones por enfermedades", definition: "Aclara que solo se cubren lesiones causadas por accidentes." },
     ],
   },
   {
@@ -502,91 +217,19 @@ const glossaryCategories: GlossaryCategory[] = [
     badge: "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-100",
     card: "bg-green-50/80 dark:bg-green-950/30",
     terms: [
-      {
-        term: "Interrupción de negocio",
-        definition: "Ingreso que recibes si tu empresa debe cerrar temporalmente por un siniestro.",
-      },
-      {
-        term: "Seguro multirriesgo",
-        definition: "Póliza integral que combina daños materiales y responsabilidades.",
-      },
-      {
-        term: "Responsabilidad civil comercial",
-        definition: "Protección frente a demandas por daños ocasionados a clientes o proveedores.",
-      },
-      {
-        term: "Cobertura de inventarios",
-        definition: "Ampara las mercancías almacenadas contra robo o desastres.",
-      },
-      {
-        term: "Maquinaria asegurada",
-        definition: "Equipo industrial protegido frente a daños súbitos.",
-      },
-      {
-        term: "Robo interno",
-        definition: "Cobertura frente a hurtos cometidos por empleados.",
-      },
-      {
-        term: "Fidelidad de empleados",
-        definition: "Garantiza el reembolso cuando un colaborador causa pérdidas intencionales.",
-      },
-      {
-        term: "Flotilla asegurada",
-        definition: "Planes diseñados para asegurar varios vehículos comerciales.",
-      },
-      {
-        term: "Transporte de mercancías",
-        definition: "Protege productos mientras se trasladan entre ciudades o bodegas.",
-      },
-      {
-        term: "Ciberriesgo",
-        definition: "Cobertura contra ataques informáticos y robo de datos.",
-      },
-      {
-        term: "Responsabilidad profesional",
-        definition: "Protege asesorías o servicios que puedan generar errores u omisiones.",
-      },
-      {
-        term: "Daños a terceros",
-        definition: "Indemniza a personas o empresas afectadas por tu operación.",
-      },
-      {
-        term: "Cláusula de ajuste automático",
-        definition: "Actualiza la suma asegurada conforme crece tu negocio.",
-      },
-      {
-        term: "Gastos extraordinarios",
-        definition: "Recursos para alquiler temporal de oficinas o maquinaria.",
-      },
-      {
-        term: "Cobertura para franquicias",
-        definition: "Protección diseñada para negocios con múltiples puntos de venta.",
-      },
-      {
-        term: "Cobertura para arrendadores",
-        definition: "Protege a dueños de locales comerciales frente a daños de inquilinos.",
-      },
+      { term: "Interrupción de negocio", definition: "Ingreso que recibes si tu empresa debe cerrar temporalmente por un siniestro." },
+      { term: "Seguro multirriesgo", definition: "Póliza integral que combina daños materiales y responsabilidades." },
+      { term: "Extracontractual", definition: "Responsabilidad, frente a visitantes." },
+      { term: "Cobertura de inventarios", definition: "Ampara las mercancías almacenadas contra robo o desastres." },
+      { term: "Maquinaria asegurada", definition: "Equipo industrial protegido frente a daños súbitos." },
+      { term: "Robo interno", definition: "Robo, desaparición mediante intimidacíon de arma o rotura de puertas, ventanas, paredes o techos." },
+      { term: "Infidelidad de empleados", definition: "Garantiza el pago de pérdida de mercancía o dinero." },
+      { term: "Transporte de mercancías", definition: "Protege productos mientras se trasladan entre ciudades o bodegas." },
+      { term: "Ciberriesgo", definition: "Cobertura contra ataques informáticos y robo de datos." },
+      { term: "Cláusula de ajuste automático", definition: "Actualiza la suma asegurada conforme crece tu negocio." },
+      { term: "Gastos extraordinarios", definition: "Recursos para alquiler temporal de oficinas o maquinaria." },
+      { term: "Cobertura para arrendadores", definition: "Protege a dueños de locales comerciales frente a daños de inquilinos." },
       { term: "Seguro de crédito", definition: "Respalda las ventas a plazo y paga si un cliente no cumple." },
-      {
-        term: "Seguro de caución",
-        definition: "Garantiza el cumplimiento de contratos ante terceros.",
-      },
-      {
-        term: "Continuidad operativa",
-        definition: "Plan que asegura recursos para retomar actividades rápidamente.",
-      },
-      {
-        term: "Plan de contingencia",
-        definition: "Guía financiada por la póliza para responder ante emergencias.",
-      },
-      {
-        term: "Asistencia legal",
-        definition: "Acceso a abogados para atender demandas asociadas al negocio.",
-      },
-      {
-        term: "Programa de beneficios para empleados",
-        definition: "Coberturas adicionales que fortalecen la retención de talento.",
-      },
     ],
   },
 ]
@@ -605,7 +248,9 @@ export default function GlossaryPage() {
       .map((category) => ({
         ...category,
         terms: category.terms.filter(
-          (term) => normalize(term.term).includes(normalizedQuery) || normalize(term.definition).includes(normalizedQuery),
+          (term) =>
+            normalize(term.term).includes(normalizedQuery) ||
+            normalize(term.definition).includes(normalizedQuery),
         ),
       }))
       .filter((category) => category.terms.length > 0)
@@ -616,7 +261,7 @@ export default function GlossaryPage() {
   return (
     <main className="min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
       <div className="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 lg:px-8">
-        {/* Bot?n volver */}
+        {/* Botón volver */}
         <div className="flex justify-start">
           <Link
             href="/"
@@ -627,7 +272,7 @@ export default function GlossaryPage() {
           </Link>
         </div>
 
-        {/* Header con estructura tipo mitos/gu?a */}
+        {/* Header */}
         <header className="mt-8 space-y-4 text-center md:text-left">
           <div className="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-xs font-semibold tracking-[0.3em] uppercase">
             Glosario de seguros en Cúcuta
@@ -642,7 +287,7 @@ export default function GlossaryPage() {
           </p>
         </header>
 
-        {/* Buscador estilo mitos */}
+        {/* Buscador */}
         <div className="mt-10 w-full rounded-3xl border border-border/70 bg-white/80 p-6 shadow-lg shadow-primary/5 backdrop-blur dark:border-white/10 dark:bg-slate-900/80">
           <label htmlFor="search-glossary" className="mb-2 block text-sm font-semibold text-muted-foreground">
             Busca por término o definición

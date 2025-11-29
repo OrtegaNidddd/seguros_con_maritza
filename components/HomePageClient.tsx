@@ -52,11 +52,11 @@ export default function HomePageClient() {
       await sendEmail(emailJsConfig.newsletterTemplateId, {
         subscriber_email: email,
       })
-      setNewsletterMessage("¡Gracias! Te escribiré pronto con novedades.")
+      setNewsletterMessage("Gracias! Te escribire pronto con novedades.")
       setEmail("")
     } catch (error) {
-      console.error("Error al enviar el correo de suscripción:", error)
-      setNewsletterMessage("Hubo un problema al enviar tu información. Por favor, intenta nuevamente en unos minutos.")
+      console.error("Error al enviar el correo de suscripcion:", error)
+      setNewsletterMessage("Hubo un problema al enviar tu informacion. Por favor, intenta nuevamente en unos minutos.")
     } finally {
       setIsNewsletterSending(false)
     }
@@ -78,16 +78,27 @@ export default function HomePageClient() {
     })
 
     try {
+      const cleanedFormData = {
+        nombreHijo: formData.nombreHijo.trim(),
+        fechaNacimiento: formData.fechaNacimiento,
+        anioEscolar: formData.anioEscolar.trim(),
+        nombreTomador: formData.nombreTomador.trim(),
+        documentoTomador: formData.documentoTomador.trim(),
+        correo: formData.correo.trim(),
+        celular: formData.celular.trim(),
+        ciudad: formData.ciudad,
+      }
+
       await sendEmail(emailJsConfig.contactTemplateId, {
-        ...formData,
-        full_name: formData.nombreCompleto.trim(),
+        ...cleanedFormData,
+        full_name: cleanedFormData.nombreHijo,
         time: submissionTime,
       })
-      setContactMessage("¡Gracias! Me pondré en contacto contigo muy pronto.")
+      setContactMessage("Gracias! Me pondre en contacto contigo muy pronto.")
       setFormData(CONTACT_FORM_INITIAL_STATE)
     } catch (error) {
       console.error("Error al enviar el formulario de contacto:", error)
-      setContactMessage("Hubo un problema al enviar tu información. Por favor, inténtalo nuevamente.")
+      setContactMessage("Hubo un problema al enviar tu informacion. Por favor, intentalo nuevamente.")
     } finally {
       setIsContactSending(false)
     }

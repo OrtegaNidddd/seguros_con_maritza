@@ -2,19 +2,25 @@ import type React from "react"
 import { Shield, CheckCircle2, Heart, Mail, Phone, MapPin } from "lucide-react"
 
 export type ContactFormValues = {
-  nombreCompleto: string
+  nombreHijo: string
+  fechaNacimiento: string
+  anioEscolar: string
+  nombreTomador: string
+  documentoTomador: string
   correo: string
   celular: string
   ciudad: string
-  edadHijo: string
 }
 
 export const CONTACT_FORM_INITIAL_STATE: ContactFormValues = {
-  nombreCompleto: "",
+  nombreHijo: "",
+  fechaNacimiento: "",
+  anioEscolar: "",
+  nombreTomador: "",
+  documentoTomador: "",
   correo: "",
   celular: "",
   ciudad: "",
-  edadHijo: "",
 }
 
 type ContactSectionProps = {
@@ -26,20 +32,20 @@ type ContactSectionProps = {
 }
 
 const COLOMBIA_CITIES = [
-  "Bogotá",
-  "Medellín",
+  "Bogota",
+  "Medellin",
   "Cali",
   "Barranquilla",
   "Cartagena",
   "Bucaramanga",
-  "Cúcuta",
+  "Cucuta",
   "Pereira",
   "Santa Marta",
   "Manizales",
   "Pasto",
   "Villavicencio",
   "Armenia",
-  "Ibagué",
+  "Ibague",
   "Neiva",
 ]
 
@@ -49,11 +55,11 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-            ¡Garantiza la educación superior de tus hijos hoy!
+            Garantiza la educacion superior de tus hijos hoy!
           </h2>
           <p className="text-lg text-muted-foreground mb-4">
-            Respaldada por 40 años de experiencia, mi compromiso es acompañar el bienestar y potenciar el
-            éxito académico de tus hijos.
+            Respaldada por 40 años de experiencia, mi compromiso es acompanar el bienestar y potenciar el exito
+            academico de tus hijos.
           </p>
         </div>
 
@@ -64,9 +70,9 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                 <Shield className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Acompañamiento especializado</p>
+                <p className="text-sm font-semibold text-foreground">Acompanamiento especializado</p>
                 <p className="text-xs text-muted-foreground">
-                  Te acompaño en cada etapa del proceso, desde la planeación hasta la proyección de metas futuras.
+                  Te acompaño en cada etapa del proceso, desde la planeacion hasta la proyeccion de metas futuras.
                 </p>
               </div>
             </div>
@@ -78,7 +84,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
               <div>
                 <p className="text-sm font-semibold text-foreground">Planes a la medida</p>
                 <p className="text-xs text-muted-foreground">
-                  Diseñamos un plan educativo personalizado según tu realidad financiera y tus objetivos.
+                  Disenamos un plan educativo personalizado segun tu realidad financiera y tus objetivos.
                 </p>
               </div>
             </div>
@@ -90,27 +96,117 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
               <div>
                 <p className="text-sm font-semibold text-foreground">Compromiso real</p>
                 <p className="text-xs text-muted-foreground">
-                  Más que una póliza, construimos juntos un proyecto de vida para quienes amas.
+                  Mas que una poliza, construimos juntos un proyecto de vida para quienes amas.
                 </p>
               </div>
             </div>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-6" aria-live="polite">
-            <div>
-              <label htmlFor="nombreCompleto" className="block text-sm font-medium text-foreground mb-2">
-                Nombre completo
-              </label>
-              <input
-                id="nombreCompleto"
-                type="text"
-                name="nombreCompleto"
-                value={formData.nombreCompleto}
-                onChange={onChange}
-                placeholder="Tu nombre y apellidos"
-                className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                required
-              />
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="nombreHijo" className="block text-sm font-medium text-foreground mb-2">
+                  Nombre del hijo
+                </label>
+                <input
+                  id="nombreHijo"
+                  type="text"
+                  name="nombreHijo"
+                  value={formData.nombreHijo}
+                  onChange={onChange}
+                  placeholder="Nombre completo del hijo"
+                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="fechaNacimiento" className="block text-sm font-medium text-foreground mb-2">
+                  Fecha de nacimiento
+                </label>
+                <input
+                  id="fechaNacimiento"
+                  type="date"
+                  name="fechaNacimiento"
+                  value={formData.fechaNacimiento}
+                  onChange={onChange}
+                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="anioEscolar" className="block text-sm font-medium text-foreground mb-2">
+                  Año escolar actual del hijo
+                </label>
+                <input
+                  id="anioEscolar"
+                  type="text"
+                  name="anioEscolar"
+                  value={formData.anioEscolar}
+                  onChange={onChange}
+                  placeholder="Ej: 10 grado"
+                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="ciudad" className="block text-sm font-medium text-foreground mb-2">
+                  Ciudad
+                </label>
+                <select
+                  id="ciudad"
+                  name="ciudad"
+                  value={formData.ciudad}
+                  onChange={onChange}
+                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  required
+                >
+                  <option value="">Selecciona una ciudad</option>
+                  {COLOMBIA_CITIES.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="nombreTomador" className="block text-sm font-medium text-foreground mb-2">
+                  Nombre completo del tomador (padre, madre u otra persona)
+                </label>
+                <input
+                  id="nombreTomador"
+                  type="text"
+                  name="nombreTomador"
+                  value={formData.nombreTomador}
+                  onChange={onChange}
+                  placeholder="Nombre de quien contrata"
+                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="documentoTomador" className="block text-sm font-medium text-foreground mb-2">
+                  Numero de documento del tomador
+                </label>
+                <input
+                  id="documentoTomador"
+                  type="text"
+                  name="documentoTomador"
+                  value={formData.documentoTomador}
+                  onChange={onChange}
+                  placeholder="CC, TI o pasaporte"
+                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  required
+                />
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
@@ -141,45 +237,6 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   value={formData.celular}
                   onChange={onChange}
                   placeholder="+57 300 000 0000"
-                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="ciudad" className="block text-sm font-medium text-foreground mb-2">
-                  Ciudad
-                </label>
-                <select
-                  id="ciudad"
-                  name="ciudad"
-                  value={formData.ciudad}
-                  onChange={onChange}
-                  className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  required
-                >
-                  <option value="">Selecciona una ciudad</option>
-                  {COLOMBIA_CITIES.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label htmlFor="edadHijo" className="block text-sm font-medium text-foreground mb-2">
-                  ¿Qué edad tienen tus hijos?
-                </label>
-                <input
-                  id="edadHijo"
-                  type="text"
-                  name="edadHijo"
-                  value={formData.edadHijo}
-                  onChange={onChange}
-                  placeholder="Ej: 17 años"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
                 />
@@ -224,7 +281,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
 
           <div className="space-y-2">
             <MapPin className="w-8 h-8 text-primary mx-auto" />
-            <p className="text-sm text-muted-foreground">Ubicación</p>
+            <p className="text-sm text-muted-foreground">Ubicacion</p>
             <p className="font-semibold text-foreground">Colombia</p>
           </div>
         </div>

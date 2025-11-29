@@ -1,7 +1,6 @@
-"use client"
-
 import Image from "next/image"
 import { useState } from "react"
+import maritzaImage from "../../public/src/foto_maritza.webp"
 
 export function AboutSection() {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -41,11 +40,11 @@ export function AboutSection() {
           <div className="flex justify-center">
             <div className="relative max-w-[340px] w-full h-full rounded-3xl overflow-hidden shadow-xl border border-border/60">
               <Image
-                src="/src/foto_maritza.webp"
-                alt="Foto de Maritza Cañas, asesora de seguros en Cúcuta"
+                src={maritzaImage}
+                alt="Maritza Cañas, asesora de seguros en Cúcuta"
                 fill
-                priority
-                unoptimized
+                placeholder="blur"
+                sizes="(max-width: 768px) 70vw, 340px"
                 className={`object-cover transition-all duration-700 ease-out ${
                   imageLoaded ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-3 blur-sm"
                 }`}
