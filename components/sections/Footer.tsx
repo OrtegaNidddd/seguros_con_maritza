@@ -34,7 +34,7 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Contacto</h4>
             <ul className="space-y-2 text-background/70">
               <li>
-                <a href="mailto:maritzcanas@gmail.com" className="hover:text-background transition">
+                <a href="mailto:maritzacanas@gmail.com" className="hover:text-background transition">
                   maritzacanas@gmail.com
                 </a>
               </li>

@@ -16,7 +16,7 @@ export function HeroSection({ email, onEmailChange, onSubmit, isSending, message
       <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Texto */}
-          <div className="space-y-6">
+          <div className="space-y-6 max-w-xl">
             <div className="inline-block bg-accent/10 px-4 py-2 rounded-full">
               <p className="text-sm font-medium text-accent">
                 40 años de experiencia certificada en seguros
@@ -65,12 +65,24 @@ export function HeroSection({ email, onEmailChange, onSubmit, isSending, message
           </div>
 
           {/* Imagen */}
-          <div className="relative sm:h-80 md:h-96 block">
-            <img
-              src="/src/familia.webp"
-              alt="Familia protegida con seguros de vida, salud, autos y hogar en Cúcuta"
-              className="w-full h-full object-cover rounded-lg shadow-2xl"
-            />
+          <div className="relative sm:h-80 md:h-112 lg:h-128">
+            <div className="flex flex-col sm:flex-row gap-4 h-full">
+              <div className="h-full sm:flex-[0.95]">
+                <img
+                  src="/src/familia_vertical.webp"
+                  alt="Familia protegida con seguros de vida, salud, autos y hogar en Cúcuta"
+                  className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                />
+              </div>
+
+              <div className="h-full sm:flex-[1.05]">
+                <img
+                  src="/src/2025-12-03.jpeg"
+                  alt="Fotografía complementaria de familia asegurada"
+                  className="w-full h-full object-fill rounded-2xl shadow-2xl"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -32,20 +32,20 @@ type ContactSectionProps = {
 }
 
 const COLOMBIA_CITIES = [
-  "Bogota",
-  "Medellin",
+  "Bogotá",
+  "Medellín",
   "Cali",
   "Barranquilla",
   "Cartagena",
   "Bucaramanga",
-  "Cucuta",
+  "Cúcuta",
   "Pereira",
   "Santa Marta",
   "Manizales",
   "Pasto",
   "Villavicencio",
   "Armenia",
-  "Ibague",
+  "Ibagué",
   "Neiva",
 ]
 
@@ -55,11 +55,11 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-            Garantiza la educacion superior de tus hijos hoy!
+            Garantiza la educación superior de tus hijos hoy!
           </h2>
           <p className="text-lg text-muted-foreground mb-4">
-            Respaldada por 40 años de experiencia, mi compromiso es acompanar el bienestar y potenciar el exito
-            academico de tus hijos.
+            Respaldada por 40 años de experiencia, mi compromiso es acompañar el bienestar y potenciar el éxito
+            académico de tus hijos.
           </p>
         </div>
 
@@ -70,9 +70,9 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                 <Shield className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Acompanamiento especializado</p>
+                <p className="text-sm font-semibold text-foreground">Acompañamiento especializado</p>
                 <p className="text-xs text-muted-foreground">
-                  Te acompaño en cada etapa del proceso, desde la planeacion hasta la proyeccion de metas futuras.
+                  Te acompaño en cada etapa del proceso, desde la planeación hasta la proyección de metas futuras.
                 </p>
               </div>
             </div>
@@ -84,7 +84,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
               <div>
                 <p className="text-sm font-semibold text-foreground">Planes a la medida</p>
                 <p className="text-xs text-muted-foreground">
-                  Disenamos un plan educativo personalizado segun tu realidad financiera y tus objetivos.
+                  Diseñamos un plan educativo personalizado según tu realidad financiera y tus objetivos.
                 </p>
               </div>
             </div>
@@ -96,7 +96,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
               <div>
                 <p className="text-sm font-semibold text-foreground">Compromiso real</p>
                 <p className="text-xs text-muted-foreground">
-                  Mas que una poliza, construimos juntos un proyecto de vida para quienes amas.
+                  Más que una póliza, construimos juntos un proyecto de vida para quienes amas.
                 </p>
               </div>
             </div>
@@ -194,7 +194,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
 
               <div>
                 <label htmlFor="documentoTomador" className="block text-sm font-medium text-foreground mb-2">
-                  Numero de documento del tomador
+                  Número de documento del tomador
                 </label>
                 <input
                   id="documentoTomador"
@@ -261,10 +261,10 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
             <Mail className="w-8 h-8 text-primary mx-auto" />
             <p className="text-sm text-muted-foreground">Correo</p>
             <a
-              href="mailto:maritzcanas@gmail.com"
+              href="mailto:maritzacanas@gmail.com"
               className="font-semibold text-foreground hover:text-primary transition"
             >
-              maritzcanas@gmail.com
+              maritzacanas@gmail.com
             </a>
           </div>
 
@@ -281,7 +281,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
 
           <div className="space-y-2">
             <MapPin className="w-8 h-8 text-primary mx-auto" />
-            <p className="text-sm text-muted-foreground">Ubicacion</p>
+            <p className="text-sm text-muted-foreground">Ubicación</p>
             <p className="font-semibold text-foreground">Colombia</p>
           </div>
         </div>
