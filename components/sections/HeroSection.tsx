@@ -77,7 +77,7 @@ export function HeroSection({ email, onEmailChange, onSubmit, isSending, message
 
               <div className="h-full sm:flex-[1.05]">
                 <img
-                  src="/src/2025-12-03.jpeg"
+                  src="/src/nuevo_año.jpeg"
                   alt="Fotografía complementaria de familia asegurada"
                   className="w-full h-full object-fill rounded-2xl shadow-2xl"
                 />
