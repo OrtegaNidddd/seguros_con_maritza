@@ -13,8 +13,14 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection"
 import { CalculatorSection } from "@/components/sections/CalculatorSection"
 import { ContactSection, CONTACT_FORM_INITIAL_STATE, type ContactFormValues } from "@/components/sections/ContactSection"
 import { Footer } from "@/components/sections/Footer"
+import type { SiteContent } from "@/lib/content"
 
-export default function HomePageClient() {
+type HomePageClientProps = {
+  content: SiteContent
+  isPreview?: boolean
+}
+
+export default function HomePageClient({ content, isPreview = false }: HomePageClientProps) {
   const [email, setEmail] = useState("")
   const [age, setAge] = useState(8)
   const [dependents, setDependents] = useState(5)
@@ -34,6 +40,9 @@ export default function HomePageClient() {
   }
 
   const sendEmail = (templateId: string, payload: Record<string, string>) => {
+    if (isPreview) {
+      return Promise.resolve()
+    }
     if (!emailJsConfig.serviceId || !templateId || !emailJsConfig.publicKey) {
       return Promise.reject(new Error("Falta configurar EmailJS en las variables de entorno."))
     }
@@ -108,17 +117,19 @@ export default function HomePageClient() {
     <div className="min-h-screen bg-linear-to-b from-background via-background to-muted">
       <Header />
       <HeroSection
+        content={content.hero}
         email={email}
         onEmailChange={setEmail}
         onSubmit={handleSubscribe}
         isSending={isNewsletterSending}
         message={newsletterMessage}
+        readOnly={isPreview}
       />
-      <AboutSection />
-      <WhyServicesSection />
-      <EducationalSection />
-      <ServicesSection />
-      <TestimonialsSection />
+      <AboutSection content={content.about} />
+      <WhyServicesSection content={content.reasons} />
+      <EducationalSection content={content.educational} />
+      <ServicesSection content={content.services} />
+      <TestimonialsSection content={content.testimonials} />
       <CalculatorSection
         age={age}
         dependents={dependents}
@@ -128,13 +139,15 @@ export default function HomePageClient() {
         onMonthlyIncomeChange={setMonthlyIncome}
       />
       <ContactSection
+        content={content.contact}
         formData={formData}
         onChange={handleFormChange}
         onSubmit={handleFormSubmit}
         isSending={isContactSending}
         message={contactMessage}
+        readOnly={isPreview}
       />
-      <Footer />
+      <Footer content={content.footer} />
     </div>
   )
 }
