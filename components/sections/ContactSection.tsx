@@ -1,5 +1,6 @@
 import type React from "react"
 import { Shield, CheckCircle2, Heart, Mail, Phone, MapPin } from "lucide-react"
+import type { ContactContent } from "@/lib/content"
 
 export type ContactFormValues = {
   nombreHijo: string
@@ -24,11 +25,13 @@ export const CONTACT_FORM_INITIAL_STATE: ContactFormValues = {
 }
 
 type ContactSectionProps = {
+  content: ContactContent
   formData: ContactFormValues
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   isSending: boolean
   message: string | null
+  readOnly?: boolean
 }
 
 const COLOMBIA_CITIES = [
@@ -49,57 +52,37 @@ const COLOMBIA_CITIES = [
   "Neiva",
 ]
 
-export function ContactSection({ formData, onChange, onSubmit, isSending, message }: ContactSectionProps) {
+const iconMap = {
+  shield: Shield,
+  check: CheckCircle2,
+  heart: Heart,
+} as const
+
+export function ContactSection({ content, formData, onChange, onSubmit, isSending, message, readOnly = false }: ContactSectionProps) {
   return (
-    <section id="contacto" className="py-12 bg-linear-to-r from-primary/5 to-accent/5">
+    <section id="contacto" className="py-12 bg-linear-to-r from-primary/5 to-accent/5" data-aos="fade-up">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-            Garantiza la educación superior de tus hijos hoy!
-          </h2>
-          <p className="text-lg text-muted-foreground mb-4">
-            Respaldada por 40 años de experiencia, mi compromiso es acompañar el bienestar y potenciar el éxito
-            académico de tus hijos.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">{content.title}</h2>
+          <p className="text-lg text-muted-foreground mb-4">{content.subtitle}</p>
         </div>
 
         <div className="bg-background rounded-2xl p-8 border border-border mb-8">
           <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="flex gap-3">
-              <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Shield className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">Acompañamiento especializado</p>
-                <p className="text-xs text-muted-foreground">
-                  Te acompaño en cada etapa del proceso, desde la planeación hasta la proyección de metas futuras.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">Planes a la medida</p>
-                <p className="text-xs text-muted-foreground">
-                  Diseñamos un plan educativo personalizado según tu realidad financiera y tus objetivos.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Heart className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">Compromiso real</p>
-                <p className="text-xs text-muted-foreground">
-                  Más que una póliza, construimos juntos un proyecto de vida para quienes amas.
-                </p>
-              </div>
-            </div>
+            {content.benefits.map((benefit) => {
+              const Icon = iconMap[benefit.icon as keyof typeof iconMap] ?? Shield
+              return (
+                <div key={benefit.title} className="flex gap-3">
+                  <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{benefit.title}</p>
+                    <p className="text-xs text-muted-foreground">{benefit.desc}</p>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
           <form onSubmit={onSubmit} className="space-y-6" aria-live="polite">
@@ -117,6 +100,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   placeholder="Nombre completo del hijo"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
 
@@ -132,6 +116,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   onChange={onChange}
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
             </div>
@@ -150,6 +135,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   placeholder="Ej: 10 grado"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
 
@@ -164,6 +150,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   onChange={onChange}
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 >
                   <option value="">Selecciona una ciudad</option>
                   {COLOMBIA_CITIES.map((city) => (
@@ -189,6 +176,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   placeholder="Nombre de quien contrata"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
 
@@ -205,6 +193,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   placeholder="CC, TI o pasaporte"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
             </div>
@@ -223,6 +212,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   placeholder="tu@email.com"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
 
@@ -239,6 +229,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
                   placeholder="+57 300 000 0000"
                   className="w-full px-4 py-2 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   required
+                  disabled={readOnly}
                 />
               </div>
             </div>
@@ -246,7 +237,7 @@ export function ContactSection({ formData, onChange, onSubmit, isSending, messag
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={isSending}
+                disabled={isSending || readOnly}
                 className="w-full py-4 bg-linear-to-r from-primary to-accent rounded-xl text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/25 transition transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSending ? "Enviando tu solicitud..." : "Ponte en contacto conmigo"}

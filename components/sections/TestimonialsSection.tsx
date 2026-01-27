@@ -1,36 +1,20 @@
 import { Star } from "lucide-react"
+import type { SiteContent } from "@/lib/content"
 
-const testimonials = [
-  {
-    name: "Carlos Méndez",
-    role: "Padre de familia",
-    message: "Maritza me explicó todo de manera clara. Ahora duermo tranquilo sabiendo que mi familia está protegida.",
-    rating: 5,
-  },
-  {
-    name: "Laura Rodríguez",
-    role: "Emprendedora",
-    message: "Excelente profesional. Me ayudó a encontrar exactamente lo que necesitaba para mis hijos.",
-    rating: 5,
-  },
-  {
-    name: "Juan Pérez",
-    role: "Ejecutivo",
-    message: "40 años de experiencia se notan. Recomiendo a Maritza sin dudarlo.",
-    rating: 5,
-  },
-]
+type TestimonialsSectionProps = {
+  content: SiteContent["testimonials"]
+}
 
-export function TestimonialsSection() {
+export function TestimonialsSection({ content }: TestimonialsSectionProps) {
   return (
-    <section id="testimonios" className="py-12 bg-card/50">
+    <section id="testimonios" className="py-12 bg-card/50" data-aos="fade-up">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">Lo que mis clientes dicen</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Testimonios reales de familias que protegieron su futuro</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">{content.title}</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{content.subtitle}</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
+          {content.items.map((testimonial) => (
             <div key={testimonial.name} className="p-6 bg-background rounded-xl border border-border hover:shadow-lg transition">
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, index) => (
