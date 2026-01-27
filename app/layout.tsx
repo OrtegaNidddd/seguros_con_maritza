@@ -2,6 +2,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Outfit, Lora } from "next/font/google";
+import { AOSInit } from "@/components/AOSInit";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://segurosconmaritza.com"),
@@ -93,7 +94,10 @@ export default function RootLayout({
         />
 
       </head>
-      <body>{children}</body>
+      <body>
+        <AOSInit />
+        {children}
+      </body>
     </html>
   );
 }
