@@ -17,35 +17,51 @@ function assertKey(key: string) {
 }
 
 export async function saveContentAction(content: SiteContent, key: string) {
-  assertKey(key)
-  await saveContent(content)
-  revalidatePath("/")
-  return { ok: true }
+  try {
+    assertKey(key)
+    await saveContent(content)
+    revalidatePath("/")
+    revalidatePath("/admin")
+    return { ok: true }
+  } catch (error) {
+    console.error("[saveContentAction] Error:", error)
+    return { ok: false, error: error instanceof Error ? error.message : "Error desconocido al guardar" }
+  }
 }
 
 export async function uploadImageAction(formData: FormData) {
-  const key = String(formData.get("key") || "")
-  assertKey(key)
+  try {
+    const key = String(formData.get("key") || "")
+    assertKey(key)
 
-  const file = formData.get("file")
-  if (!file || !(file instanceof File)) {
-    throw new Error("No se recibió un archivo válido.")
+    const file = formData.get("file")
+    if (!file || !(file instanceof File)) {
+      throw new Error("No se recibió un archivo válido.")
+    }
+
+    if (!file.type.startsWith("image/")) {
+      throw new Error("Solo se permiten imágenes.")
+    }
+
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+
+    const safeName = file.name.replace(/[^a-zA-Z0-9.\-]/g, "_")
+    const fileName = `${Date.now()}-${safeName}`
+    const uploadDir = path.join(process.cwd(), "public", "src")
+    const filePath = path.join(uploadDir, fileName)
+
+    await fs.mkdir(uploadDir, { recursive: true })
+    await fs.writeFile(filePath, buffer)
+
+    // Revalidar rutas para que Next.js reconozca el nuevo archivo en producción
+    revalidatePath("/")
+    revalidatePath("/admin")
+    revalidatePath(`/src/${fileName}`)
+
+    return { ok: true, path: `/src/${fileName}` }
+  } catch (error) {
+    console.error("[uploadImageAction] Error:", error)
+    return { ok: false, error: error instanceof Error ? error.message : "Error desconocido al subir imagen" }
   }
-
-  if (!file.type.startsWith("image/")) {
-    throw new Error("Solo se permiten imágenes.")
-  }
-
-  const arrayBuffer = await file.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
-
-  const safeName = file.name.replace(/[^a-zA-Z0-9.\-]/g, "_")
-  const fileName = `${Date.now()}-${safeName}`
-  const uploadDir = path.join(process.cwd(), "public", "src")
-  const filePath = path.join(uploadDir, fileName)
-
-  await fs.mkdir(uploadDir, { recursive: true })
-  await fs.writeFile(filePath, buffer)
-
-  return { path: `/src/${fileName}` }
 }

@@ -1,4 +1,4 @@
-"use client"
+ "use client"
 
 import { useMemo, useState } from "react"
 import HomePageClient from "@/components/HomePageClient"
@@ -32,8 +32,13 @@ export function AdminPageClient({ initialContent }: AdminPageClientProps) {
     formData.append("file", file)
     formData.append("key", adminKey)
     const result = await uploadImageAction(formData)
+    
+    if (!result.ok) {
+      throw new Error(result.error || "Error al subir imagen")
+    }
+    
     setStatus("Imagen subida correctamente")
-    return result.path
+    return result.path!
   }
 
   const handleHeroImageUpload = async (file: File, index: number) => {
@@ -93,10 +98,20 @@ export function AdminPageClient({ initialContent }: AdminPageClientProps) {
     setSaving(true)
     setStatus(null)
     try {
-      await saveContentAction(draft, adminKey)
-      setStatus("Contenido guardado y publicado")
+      const result = await saveContentAction(draft, adminKey)
+      
+      if (result.ok) {
+        setStatus("Contenido guardado y publicado")
+        setToast({ message: "Contenido guardado correctamente", type: "success" })
+      } else {
+        setStatus(result.error || "Error al guardar")
+        setToast({ message: result.error || "Error al guardar", type: "error" })
+      }
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Error al guardar")
+      const errorMsg = error instanceof Error ? error.message : "Error al guardar"
+      setStatus(errorMsg)
+      setToast({ message: errorMsg, type: "error" })
+      console.error("[handleSave] Error:", error)
     } finally {
       setSaving(false)
     }
