@@ -1,6 +1,6 @@
 import fs from "fs/promises"
 import path from "path"
-import { NextResponse } from "next/server"
+import { NextResponse, type NextRequest } from "next/server"
 
 const UPLOADS_DIR = process.env.UPLOADS_DIR
 
@@ -50,8 +50,9 @@ function getContentType(fileName: string) {
   }
 }
 
-export async function GET(_request: Request, { params }: { params: { file: string } }) {
-  const fileName = decodeURIComponent(params.file)
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ file: string }> }) {
+  const resolvedParams = await params
+  const fileName = decodeURIComponent(resolvedParams.file)
   if (!fileName || fileName.includes("..")) {
     return NextResponse.json({ error: "Archivo inválido" }, { status: 400 })
   }
