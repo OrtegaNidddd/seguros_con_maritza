@@ -1,6 +1,7 @@
  "use client"
 
 import { useMemo, useState } from "react"
+import { Eye, EyeOff } from "lucide-react"
 import HomePageClient from "@/components/HomePageClient"
 import type { SiteContent, ImageContent, ServiceItem, TestimonialItem, SimpleItem, EducationalItem } from "@/lib/content"
 import { saveContentAction, uploadImageAction } from "./actions"
@@ -18,6 +19,7 @@ type AdminPageClientProps = {
 export function AdminPageClient({ initialContent }: AdminPageClientProps) {
   const [draft, setDraft] = useState<SiteContent>(initialContent)
   const [adminKey, setAdminKey] = useState("")
+  const [showAdminKey, setShowAdminKey] = useState(false)
   const [status, setStatus] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [uploadingIndex, setUploadingIndex] = useState<string | null>(null)
@@ -128,13 +130,23 @@ export function AdminPageClient({ initialContent }: AdminPageClientProps) {
             <p className="text-sm text-muted-foreground">Edita textos e imágenes. Usa la clave para guardar.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-            <input
-              type="password"
-              placeholder="Clave de edición"
-              value={adminKey}
-              onChange={(e) => setAdminKey(e.target.value)}
-              className="px-3 py-2 rounded-md border border-border bg-background text-foreground"
-            />
+            <div className="flex items-center gap-2">
+              <input
+                type={showAdminKey ? "text" : "password"}
+                placeholder="Clave de edición"
+                value={adminKey}
+                onChange={(e) => setAdminKey(e.target.value)}
+                className="px-3 py-2 rounded-md border border-border bg-background text-foreground"
+              />
+              <button
+                type="button"
+                onClick={() => setShowAdminKey((prev) => !prev)}
+                className="px-3 py-2 rounded-md border border-border text-sm"
+                aria-label={showAdminKey ? "Ocultar clave" : "Mostrar clave"}
+              >
+                {showAdminKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
             <div className="flex gap-2">
               <button
                 type="button"
