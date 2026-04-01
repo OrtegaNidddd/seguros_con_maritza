@@ -1,5 +1,4 @@
-import fs from "fs/promises"
-import path from "path"
+import { supabaseServer } from "@/lib/supabase-server"
 
 export type ImageContent = { src: string; alt: string }
 export type HeroContent = {
@@ -65,8 +64,6 @@ export type SiteContent = {
   contact: ContactContent
   footer: FooterContent
 }
-
-const CONTENT_PATH = path.join(process.cwd(), "data", "content.json")
 
 export const DEFAULT_CONTENT: SiteContent = {
   hero: {
@@ -164,25 +161,40 @@ export const DEFAULT_CONTENT: SiteContent = {
   },
 }
 
+const SECTION_KEY = "site"
+
 export async function getContent(): Promise<SiteContent> {
-  try {
-    const file = await fs.readFile(CONTENT_PATH, "utf8")
-    return JSON.parse(file) as SiteContent
-  } catch (error) {
-    await ensureContentFile(DEFAULT_CONTENT)
-    return DEFAULT_CONTENT
+  const { data, error } = await supabaseServer
+    .from("site_content")
+    .select("content_json")
+    .eq("section_key", SECTION_KEY)
+    .maybeSingle()
+
+  if (error) {
+    throw new Error(`Error consultando contenido: ${error.message}`)
   }
+
+  if (data?.content_json) {
+    return data.content_json as SiteContent
+  }
+
+  await saveContent(DEFAULT_CONTENT)
+  return DEFAULT_CONTENT
 }
 
 export async function saveContent(content: SiteContent) {
-  await fs.mkdir(path.dirname(CONTENT_PATH), { recursive: true })
-  await fs.writeFile(CONTENT_PATH, JSON.stringify(content, null, 2), "utf8")
-}
+  const { error } = await supabaseServer
+    .from("site_content")
+    .upsert(
+      {
+        section_key: SECTION_KEY,
+        content_json: content,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "section_key" },
+    )
 
-async function ensureContentFile(content: SiteContent) {
-  try {
-    await fs.access(CONTENT_PATH)
-  } catch (_) {
-    await saveContent(content)
+  if (error) {
+    throw new Error(`Error guardando contenido: ${error.message}`)
   }
 }

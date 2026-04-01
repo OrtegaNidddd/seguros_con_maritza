@@ -1,12 +1,11 @@
 "use server"
 
-import fs from "fs/promises"
-import path from "path"
 import { revalidatePath } from "next/cache"
 import { saveContent, type SiteContent } from "@/lib/content"
+import { supabaseServer } from "@/lib/supabase-server"
 
 const ADMIN_KEY = process.env.ADMIN_KEY || process.env.NEXT_ADMIN_KEY || ""
-const UPLOADS_DIR = process.env.UPLOADS_DIR
+const BUCKET_NAME = "site-images"
 
 function assertKey(key: string) {
   if (!ADMIN_KEY) {
@@ -15,33 +14,6 @@ function assertKey(key: string) {
   if (key !== ADMIN_KEY) {
     throw new Error("Clave incorrecta.")
   }
-}
-
-async function pathExists(targetPath: string) {
-  try {
-    await fs.access(targetPath)
-    return true
-  } catch {
-    return false
-  }
-}
-
-async function resolvePublicDir() {
-  if (UPLOADS_DIR) {
-    return UPLOADS_DIR
-  }
-
-  const cwdPublic = path.join(process.cwd(), "public")
-  if (await pathExists(cwdPublic)) {
-    return cwdPublic
-  }
-
-  const standalonePublic = path.resolve(process.cwd(), "..", "..", "public")
-  if (await pathExists(standalonePublic)) {
-    return standalonePublic
-  }
-
-  return cwdPublic
 }
 
 export async function saveContentAction(content: SiteContent, key: string) {
@@ -53,7 +25,10 @@ export async function saveContentAction(content: SiteContent, key: string) {
     return { ok: true }
   } catch (error) {
     console.error("[saveContentAction] Error:", error)
-    return { ok: false, error: error instanceof Error ? error.message : "Error desconocido al guardar" }
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : "Error desconocido al guardar",
+    }
   }
 }
 
@@ -74,23 +49,34 @@ export async function uploadImageAction(formData: FormData) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    const safeName = file.name.replace(/[^a-zA-Z0-9.\-]/g, "_")
+    const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_")
     const fileName = `${Date.now()}-${safeName}`
-    const publicDir = await resolvePublicDir()
-    const uploadDir = path.join(publicDir, "src")
-    const filePath = path.join(uploadDir, fileName)
+    const filePath = `uploads/${fileName}`
 
-    await fs.mkdir(uploadDir, { recursive: true })
-    await fs.writeFile(filePath, buffer)
+    const { error: uploadError } = await supabaseServer.storage
+      .from(BUCKET_NAME)
+      .upload(filePath, buffer, {
+        contentType: file.type,
+        upsert: false,
+      })
 
-    // Revalidar rutas para que Next.js reconozca el nuevo archivo en producción
+    if (uploadError) {
+      throw new Error(`Error subiendo imagen: ${uploadError.message}`)
+    }
+
+    const { data } = supabaseServer.storage
+      .from(BUCKET_NAME)
+      .getPublicUrl(filePath)
+
     revalidatePath("/")
     revalidatePath("/admin")
-    revalidatePath(`/src/${fileName}`)
 
-    return { ok: true, path: `/src/${fileName}` }
+    return { ok: true, path: data.publicUrl }
   } catch (error) {
     console.error("[uploadImageAction] Error:", error)
-    return { ok: false, error: error instanceof Error ? error.message : "Error desconocido al subir imagen" }
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : "Error desconocido al subir imagen",
+    }
   }
 }
