@@ -1,4 +1,5 @@
 import type React from "react"
+import Image from "next/image"
 import type { HeroContent } from "@/lib/content"
 
 type HeroSectionProps = {
@@ -71,9 +72,12 @@ export function HeroSection({ content, email, onEmailChange, onSubmit, isSending
                   className="h-full sm:flex-1" 
                   style={{ flex: filteredImages.length === 1 ? '0 1 70%' : (index === 0 ? 0.95 : 1.05) }}
                 >
-                  <img
+                  <Image
                     src={image.src}
                     alt={image.alt}
+                    width={900}
+                    height={1100}
+                    priority={index === 0}
                     className="w-full h-full object-cover rounded-2xl shadow-2xl"
                   />
                 </div>

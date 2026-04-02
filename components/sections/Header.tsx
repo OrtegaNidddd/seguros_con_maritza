@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
@@ -35,9 +36,11 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-6 group transition">
           <div className="w-32 h-auto rounded-lg flex items-center justify-center">
-            <img
+            <Image
               src="/src/logo.webp"
               alt="Logo de Seguros con Maritza, asesora de seguros en Cúcuta"
+              width={320}
+              height={96}
               className="w-full h-full transition-transform duration-200 group-hover:scale-105"
             />
           </div>

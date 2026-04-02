@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Upload, X } from "lucide-react"
 import { useState } from "react"
 
@@ -56,7 +57,13 @@ export function ImageUploader({
 
       {src && (
         <div className="relative group">
-          <img src={src} alt={alt || "Preview"} className="w-full h-64 object-contain rounded-lg border border-border bg-muted/50" />
+          <Image
+            src={src}
+            alt={alt || "Preview"}
+            width={1200}
+            height={640}
+            className="w-full h-64 object-contain rounded-lg border border-border bg-muted/50"
+          />
           <button
             type="button"
             onClick={() => onSrcChange("")}
