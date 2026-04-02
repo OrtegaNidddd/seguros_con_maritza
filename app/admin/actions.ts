@@ -6,6 +6,8 @@ import { supabaseServer } from "@/lib/supabase-server"
 
 const ADMIN_KEY = process.env.ADMIN_KEY || process.env.NEXT_ADMIN_KEY || ""
 const BUCKET_NAME = "site-images"
+const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"]
+const MAX_FILE_SIZE = 3 * 1024 * 1024 // 3 MB
 
 function assertKey(key: string) {
   if (!ADMIN_KEY) {
@@ -42,12 +44,21 @@ export async function uploadImageAction(formData: FormData) {
       throw new Error("No se recibió un archivo válido.")
     }
 
-    if (!file.type.startsWith("image/")) {
-      throw new Error("Solo se permiten imágenes.")
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+      throw new Error("Solo se permiten imágenes JPG, PNG o WEBP.")
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      throw new Error("La imagen no puede superar 3 MB.")
     }
 
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
+
+    const extension = file.name.split(".").pop()?.toLowerCase()
+    if (!extension || !["jpg", "jpeg", "png", "webp"].includes(extension)) {
+      throw new Error("Extensión de archivo no permitida.")
+    }
 
     const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_")
     const fileName = `${Date.now()}-${safeName}`
