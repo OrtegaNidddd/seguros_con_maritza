@@ -19,7 +19,7 @@ type ServicesSectionProps = {
 export function ServicesSection({ content }: ServicesSectionProps) {
   return (
     <section id="servicios" className="py-12" data-aos="fade-up">
-      <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">{content.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{content.subtitle}</p>
@@ -34,7 +34,7 @@ export function ServicesSection({ content }: ServicesSectionProps) {
                 background: `linear-gradient(to bottom right, ${service.bgColorStart}, ${service.bgColorEnd})`,
                 borderColor: service.borderColor,
               }}
-              className="group relative overflow-hidden rounded-xl border-2 transition-all duration-300 ease-out cursor-pointer h-54 w-11/12 mx-auto flex flex-col justify-between p-5 hover:-translate-y-2 hover:shadow-2xl"
+              className="group relative overflow-hidden rounded-xl border-2 transition-all duration-300 ease-out cursor-pointer h-54 w-full mx-auto flex flex-col justify-between p-5 hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className={`absolute inset-0 ${service.featured ? "bg-white/20" : "bg-black/10"} group-hover:${service.featured ? "bg-white/30" : "bg-black/5"} transition pointer-events-none`} />
               <div className="relative z-10 flex flex-col h-full justify-between">
@@ -44,10 +44,6 @@ export function ServicesSection({ content }: ServicesSectionProps) {
                   </div>
                   <h3 className="font-semibold text-xl mb-2" style={{ color: service.textColor }}>{service.title}</h3>
                   <p className="text-base opacity-90" style={{ color: service.textColor }}>{service.desc}</p>
-                </div>
-                <div className="flex items-center gap-2 text-base opacity-80 group-hover:opacity-100 transition" style={{ color: service.textColor }}>
-                  <span className="font-semibold">Conocer más</span>
-                  <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
             </div>
