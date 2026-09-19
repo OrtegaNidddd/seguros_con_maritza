@@ -37,7 +37,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-6 group transition">
           <div className="w-32 h-auto rounded-lg flex items-center justify-center">
             <Image
-              src="/src/logo.webp"
+              src="/src/logo_nuevo.png"
               alt="Logo de Seguros con Maritza, asesora de seguros en Cúcuta"
               width={320}
               height={96}
